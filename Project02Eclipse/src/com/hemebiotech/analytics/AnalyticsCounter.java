@@ -1,8 +1,5 @@
 package com.hemebiotech.analytics;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,14 +7,8 @@ import java.util.TreeMap;
 
 public class AnalyticsCounter {
 
-    private ISymptomReader reader;
-    private ISymptomWriter writer;
-
-    private Map<String, Integer> countedSymptoms;
-    private List<String> symptoms;
-    private static int headacheCount;
-    private static int rashCount;
-    private static int pupilCount;
+    private final ISymptomReader reader;
+    private final ISymptomWriter writer;
 
     public AnalyticsCounter(ISymptomReader reader, ISymptomWriter writer) {
         this.reader = reader;
@@ -30,8 +21,7 @@ public class AnalyticsCounter {
      * @return List of symptoms as strings
      */
     public List<String> getSymptoms() {
-        symptoms = reader.GetSymptoms();
-        return symptoms;
+        return reader.GetSymptoms();
     }
 
     /**
@@ -42,11 +32,9 @@ public class AnalyticsCounter {
      */
     public Map<String, Integer> countSymptoms(List<String> symptoms) {
 
-        countedSymptoms = new HashMap<>();
+        Map<String, Integer> countedSymptoms = new HashMap<>();
 
-        symptoms.forEach((symptom) -> {
-            countedSymptoms.put(symptom, countedSymptoms.getOrDefault(symptom, 0) + 1);
-        });
+        symptoms.forEach((symptom) -> countedSymptoms.put(symptom, countedSymptoms.getOrDefault(symptom, 0) + 1));
         return countedSymptoms;
     }
 
@@ -61,47 +49,9 @@ public class AnalyticsCounter {
 
     /**
      * Write symptoms to file
-     * @param symptoms
+     * @param symptoms list of symptoms and their occurrences
      */
     public void writeSymptoms(Map<String, Integer> symptoms){
         writer.writeSymptoms(symptoms);
-    }
-
-    public static void main(String args[]) throws Exception {
-        // first get input
-        BufferedReader reader = new BufferedReader(new FileReader
-                ("symptoms.txt"));
-        String line = reader.readLine();
-
-        int tempHeadCount = 0;
-        int tempRashCount = 0;
-        int tempPupilCount = 0;
-
-        while (line != null) {
-
-            System.out.println("symptom from file: " + line);
-            if (line.equals("headache")) {
-                tempHeadCount++;
-                System.out.println("number of headaches: " + tempHeadCount);
-            } else if (line.equals("rash")) {
-                tempRashCount++;
-            } else if (line.contains("dialated pupils")) {
-                tempPupilCount++;
-            }
-
-            line = reader.readLine();    // get another symptom
-        }
-
-
-        headacheCount = tempHeadCount;
-        rashCount = tempRashCount;
-        pupilCount = tempPupilCount;
-
-        // next generate output
-        FileWriter writer = new FileWriter("result.out");
-        writer.write("headache: " + headacheCount + "\n");
-        writer.write("rash: " + rashCount + "\n");
-        writer.write("dialated pupils: " + pupilCount + "\n");
-        writer.close();
     }
 }
