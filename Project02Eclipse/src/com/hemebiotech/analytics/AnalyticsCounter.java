@@ -16,17 +16,15 @@ public class AnalyticsCounter {
     }
 
     /**
-     * Reads a list of symptoms from a file
-     *
+     * Retrieves a list of symptoms
      * @return List of symptoms as strings
      */
     public List<String> getSymptoms() {
-        return reader.GetSymptoms();
+        return reader.getSymptoms();
     }
 
     /**
-     * Iterate over a list of symptoms and count the number of occurrences of the symptom in the list
-     *
+     * Counts the number of occurrences for each symptom in a list
      * @param symptoms is a list of symptoms as strings
      * @return a map with symptom and the number of occurrences
      */
@@ -41,7 +39,7 @@ public class AnalyticsCounter {
     /**
      * Sort symptoms in alphabetic order
      * @param symptoms is a map of symptoms and their occurrences
-     * @return a treemap which is sorted in natural order
+     * @return a map of symptoms sorted by name
      */
     public Map<String,Integer> sortSymptoms(Map<String,Integer> symptoms){
         return new TreeMap<>(symptoms);
@@ -49,7 +47,7 @@ public class AnalyticsCounter {
 
     /**
      * Write symptoms to file
-     * @param symptoms list of symptoms and their occurrences
+     * @param symptoms a map of symptoms and their occurrences
      */
     public void writeSymptoms(Map<String, Integer> symptoms){
         writer.writeSymptoms(symptoms);

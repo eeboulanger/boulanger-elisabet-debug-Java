@@ -6,20 +6,19 @@ import java.util.Map;
 
 public class WriteSymptomDataToFile implements ISymptomWriter {
 
-    private String filePath;
+    private final String filePath;
 
     /**
-     * @param filePath a full or partial path to file where the symptoms and their value will be written, one per line
+     * Initialize to write to a specific file path
+     * @param filePath a full or partial path to file where the symptoms will be written
      */
     public WriteSymptomDataToFile(String filePath) {
         this.filePath = filePath;
     }
 
     /**
-     * @param symptoms is a map of symptom name and number of occurrences
-     *                 Iterate and write symptom and value to file, one per line in the following format:
-     *                 Example: 10
-     *                 AnotherExample: 2
+     * Writes the symptom data to a file, each symptom name and number of occurrences on a new line
+     * @param symptoms is a map of symptom names as keys and number of occurrences as values
      */
     @Override
     public void writeSymptoms(Map<String, Integer> symptoms) {
