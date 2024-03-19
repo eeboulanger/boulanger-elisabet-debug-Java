@@ -59,6 +59,14 @@ public class AnalyticsCounter {
         return new TreeMap<>(symptoms);
     }
 
+    /**
+     * Write symptoms to file
+     * @param symptoms
+     */
+    public void writeSymptoms(Map<String, Integer> symptoms){
+        writer.writeSymptoms(symptoms);
+    }
+
     public static void main(String args[]) throws Exception {
         // first get input
         BufferedReader reader = new BufferedReader(new FileReader
