@@ -9,7 +9,7 @@ import java.util.Map;
 public interface ISymptomWriter {
 
     /**
-     * The method will use the
+     * The method will take the
      * @param symptoms which is a map of symptom name as string and number of occurrences as value and write it to a source
      *
      */

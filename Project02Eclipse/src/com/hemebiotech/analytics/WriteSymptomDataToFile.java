@@ -24,20 +24,18 @@ public class WriteSymptomDataToFile implements ISymptomWriter {
     @Override
     public void writeSymptoms(Map<String, Integer> symptoms) {
 
-        try {
-            FileWriter writer = new FileWriter(filePath);
+        if (filePath != null) {
+            try {
+                FileWriter writer = new FileWriter(filePath);
 
-            symptoms.forEach((symptom, value) -> {
-                try {
-                    writer.write(symptom + ": " + value + "\n");
-                } catch (IOException e) {
-                    System.err.println("An error has occurred: " + e);
+                for(Map.Entry<String, Integer>  entry : symptoms.entrySet()) {
+                    writer.write(entry.getKey() + ": " + entry.getValue() + "\n");
                 }
-            });
-            writer.close();
+                writer.close();
 
-        } catch (IOException e) {
-            System.err.println("An error has occurred: " + e);
+            } catch (IOException e) {
+                System.err.println("An error has occurred: " + e.getMessage());
+            }
         }
     }
 }
