@@ -4,6 +4,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Map;
 
+/**
+ * Writes symptom data to a file, each symptom name and number of occurrences on a new line
+ */
 public class WriteSymptomDataToFile implements ISymptomWriter {
 
     private final String filePath;
@@ -17,7 +20,7 @@ public class WriteSymptomDataToFile implements ISymptomWriter {
     }
 
     /**
-     * Writes the symptom data to a file, each symptom name and number of occurrences on a new line
+     * Writes symptom name and number of occurences to a file
      * @param symptoms is a map of symptom names as keys and number of occurrences as values
      */
     @Override
